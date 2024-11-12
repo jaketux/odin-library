@@ -8,6 +8,31 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <h1>Your Library</h1>
+    <div class="subheading">Keep track of the books you have read with your personal library.</div>
+    <form action="post">
+    <div class="form-booktitle">
+        <label for="booktitle">Title:</label>
+        <input type="text" id="booktitle" name="booktitle" placeholder="The Da Vinci Code" required>
+    </div>
+    <div class="form-bookauthor">
+        <label for="bookauthor">Author:</label>
+        <input type="text" id="bookauthor" name="bookauthor" placeholder="Dan Brown" required>
+    </div>
+    <div class="form-bookpages">
+        <label for="bookpages">Pages:</label>
+        <input type="text" id="bookpages" name="bookpages" placeholder="597" required>
+    </div>
+    <div class="form-bookread">
+        <div class="subheading">Have you read this book?</div>
+        <label for="bookread-yes" id="yes-label">Yes</label>
+        <input type="radio" id="radio-yes" name="book-read" required>
+        <label for="bookread-yes" id="no-label">No</label>
+        <input type="radio" id="radio-no" name="book-read" required>
+    </div>
+    <button type="submit" id="submit-btn">Add Book</button>
+
+    </form>
     <div class="container">
 
     </div>

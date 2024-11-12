@@ -29,3 +29,32 @@
 .removebutton{margin-bottom:20px;}
 
 p{margin:10px;}
+
+.form-booktitle, .form-bookauthor, .form-bookpages{
+    margin-top:15px;
+}
+
+
+.form-bookread{display:flex;
+justify-content:flex-start;
+align-items:center;
+margin:15px 0px}
+
+form{display:flex;
+flex-direction:column;
+}
+
+#yes-label, #no-label{
+    margin-left:10px;
+}
+
+input{
+    margin-left:20px;
+}
+
+#submit-btn{
+    width:125px;
+    height:35px;
+    margin-bottom:50px;
+    border-radius:10px;
+}

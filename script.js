@@ -1,14 +1,10 @@
 const bookContainer = document.querySelector('.container')
-const checkbox = document.querySelector('#readbook')
 
 const libraryOfBooks = [
     {title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", pages: 223, read: "No"},
     {title: "Throne of Glass", author: "Sarah J. Maas", pages: 464, read: "Yes"},
     {title: "Iron Flame", author: "Rebecca Yarros", pages: 623, read: "Yes"},
     {title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", pages: 223, read: "No"},
-
-
-
 ]
 
 function Book(title, author, pages, read) {
@@ -16,12 +12,30 @@ function Book(title, author, pages, read) {
     this.author = author
     this.pages = pages
     this.read = read
+    }
+
+
+
+Book.prototype.deleteBook = function() {
+    libraryOfBooks.splice(this.book,1)
 }
 
 function addBookToLibrary(){
-    let newBook = new Book(prompt("Book Title"),prompt("Author"),prompt("Pages"), prompt("Read?"))
+    const newBook = new Book(prompt("Book Title"),prompt("Author"),prompt("Pages"), prompt("Read?"))
     libraryOfBooks.push(newBook)
 }
+
+
+Book.prototype.updateToRead = function(){
+    const bookCards = document.querySelectorAll('.bookcard')
+    for (bookCard of bookCards){
+    bookCard.remove()}
+    this.read = "Yes"
+    displayBooks()
+    console.log(libraryOfBooks)
+}
+
+
 
 console.log(libraryOfBooks)
 
@@ -55,8 +69,7 @@ function displayBooks(){
             label.appendChild(document.createTextNode('Mark as Read?'))
             checkbox.addEventListener('change', function(){
                 if (this.checked){
-                    readParagraph.textContent = "Read?: Yes"
-                    bookCard.removeChild(checkboxBox)
+                  book.updateToRead();
                 }})
             let removeButton = document.createElement('input')
             removeButton.type = "button"
@@ -75,7 +88,7 @@ function displayBooks(){
             checkboxBox.appendChild(checkbox)
             checkboxBox.appendChild(label)
             bookCard.appendChild(removeButton)
-
+        
         } else if (book.read === "Yes"){
             const bookCard = document.createElement("div")
             bookCard.classList.add("bookcard")
@@ -105,11 +118,10 @@ function displayBooks(){
             bookCard.appendChild(pagesParagraph)
             bookCard.appendChild(readParagraph)
             bookCard.appendChild(removeButton)
-
-
             }
     }
-}
+    }
+
 
 displayBooks()
 
