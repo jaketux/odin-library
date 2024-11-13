@@ -24,7 +24,6 @@ Book.prototype.markAsRead = function(){
     bookCard.remove()}
     this.read = "Yes"
     displayBooks()
-    console.log(libraryOfBooks)
 }
 
 Book.prototype.markAsUnread = function(){
@@ -33,7 +32,6 @@ Book.prototype.markAsUnread = function(){
     bookCard.remove()}
     this.read = "No"
     displayBooks()
-    console.log(libraryOfBooks)
 }
 
 submitBtn.addEventListener("click",function(){
@@ -59,10 +57,7 @@ Book.prototype.updateToRead = function(){
     bookCard.remove()}
     this.read = "Yes"
     displayBooks()
-    console.log(libraryOfBooks)
 }
-
-console.log(libraryOfBooks)
 
 function displayBooks(){
     for (const book of libraryOfBooks){
@@ -89,7 +84,6 @@ function displayBooks(){
             markAsReadButton.classList.add("markasreadbutton")
             markAsReadButton.addEventListener("click",function(){
                 book.markAsRead()
-                console.log(libraryOfBooks)
             })
             let removeButton = document.createElement('input')
             removeButton.type = "button"
@@ -99,7 +93,6 @@ function displayBooks(){
             removeButton.addEventListener("click",function(){
                 bookCard.remove()
                 book.deleteBook()
-                console.log(libraryOfBooks)
             })
             bookContainer.appendChild(bookCard)
             bookCard.appendChild(titleParagraph)
@@ -132,7 +125,6 @@ function displayBooks(){
             markAsUnreadButton.classList.add("markasunreadbutton")
             markAsUnreadButton.addEventListener("click",function(){
                 book.markAsUnread()
-                console.log(libraryOfBooks)
             })
             let removeButton = document.createElement('input')
             removeButton.type = "button"
@@ -142,7 +134,6 @@ function displayBooks(){
             removeButton.addEventListener("click",function(){
                 bookCard.remove()
                 book.deleteBook()
-                console.log(libraryOfBooks)
             })
             bookContainer.appendChild(bookCard)
             bookCard.appendChild(titleParagraph)
@@ -154,7 +145,6 @@ function displayBooks(){
             }
     }
     }
-
 
 displayBooks()
 
