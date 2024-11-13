@@ -1,10 +1,8 @@
 const bookContainer = document.querySelector('.container')
+const submitBtn = document.querySelector('#submit-btn')
 
 const libraryOfBooks = [
-    {title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", pages: 223, read: "No"},
-    {title: "Throne of Glass", author: "Sarah J. Maas", pages: 464, read: "Yes"},
-    {title: "Iron Flame", author: "Rebecca Yarros", pages: 623, read: "Yes"},
-    {title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", pages: 223, read: "No"},
+
 ]
 
 function Book(title, author, pages, read) {
@@ -17,13 +15,42 @@ function Book(title, author, pages, read) {
 
 
 Book.prototype.deleteBook = function() {
-    libraryOfBooks.splice(this.book,1)
+    libraryOfBooks.splice(libraryOfBooks.indexOf(this),1)
 }
 
-function addBookToLibrary(){
-    const newBook = new Book(prompt("Book Title"),prompt("Author"),prompt("Pages"), prompt("Read?"))
-    libraryOfBooks.push(newBook)
+Book.prototype.markAsRead = function(){
+    const bookCards = document.querySelectorAll('.bookcard')
+    for (bookCard of bookCards){
+    bookCard.remove()}
+    this.read = "Yes"
+    displayBooks()
+    console.log(libraryOfBooks)
 }
+
+Book.prototype.markAsUnread = function(){
+    const bookCards = document.querySelectorAll('.bookcard')
+    for (bookCard of bookCards){
+    bookCard.remove()}
+    this.read = "No"
+    displayBooks()
+    console.log(libraryOfBooks)
+}
+
+submitBtn.addEventListener("click",function(){
+    const bookTitleForm = document.querySelector('#booktitle')
+    const bookAuthorForm = document.querySelector('#bookauthor')
+    const bookPagesForm = document.querySelector('#bookpages')
+    const readResponse = document.querySelector('input[name=book-read]:checked')
+    const bookCards = document.querySelectorAll('.bookcard')
+    const form = document.querySelector('form')
+    const newBook = new Book(bookTitleForm.value,bookAuthorForm.value,bookPagesForm.value, readResponse.value)
+    for (bookCard of bookCards){
+      bookCard.remove()}
+    libraryOfBooks.push(newBook)
+    displayBooks()
+    form.reset()
+
+})
 
 
 Book.prototype.updateToRead = function(){
@@ -35,8 +62,6 @@ Book.prototype.updateToRead = function(){
     console.log(libraryOfBooks)
 }
 
-
-
 console.log(libraryOfBooks)
 
 function displayBooks(){
@@ -44,6 +69,7 @@ function displayBooks(){
         if (book.read === "No"){
             const bookCard = document.createElement("div")
             bookCard.classList.add("bookcard")
+            bookCard.classList.add("unreadbook")
             const titleParagraph = document.createElement("p")
             titleParagraph.classList.add("title")
             titleParagraph.textContent = "Title: "+book.title
@@ -56,21 +82,15 @@ function displayBooks(){
             const readParagraph = document.createElement("p")
             readParagraph.classList.add("read")
             readParagraph.textContent = "Read?: No"
-            const checkboxBox = document.createElement("div")
-            checkboxBox.classList.add("checkboxbox")
-            let checkbox = document.createElement('input')
-            checkbox.type = "checkbox"
-            checkbox.name = "readbook"
-            checkbox.value = "readbookvalue"
-            checkbox.id = "readbook"
-            let label = document.createElement('label')
-            label.htmlFor = "id"
-            label.id = "readbooklabel"
-            label.appendChild(document.createTextNode('Mark as Read?'))
-            checkbox.addEventListener('change', function(){
-                if (this.checked){
-                  book.updateToRead();
-                }})
+            let markAsReadButton = document.createElement('input')
+            markAsReadButton.type = "button"
+            markAsReadButton.name = "markasreadbutton"
+            markAsReadButton.value = "Mark as Read?"
+            markAsReadButton.classList.add("markasreadbutton")
+            markAsReadButton.addEventListener("click",function(){
+                book.markAsRead()
+                console.log(libraryOfBooks)
+            })
             let removeButton = document.createElement('input')
             removeButton.type = "button"
             removeButton.name = "removebutton"
@@ -78,20 +98,21 @@ function displayBooks(){
             removeButton.classList.add("removebutton")
             removeButton.addEventListener("click",function(){
                 bookCard.remove()
+                book.deleteBook()
+                console.log(libraryOfBooks)
             })
             bookContainer.appendChild(bookCard)
             bookCard.appendChild(titleParagraph)
             bookCard.appendChild(authorParagraph)
             bookCard.appendChild(pagesParagraph)
             bookCard.appendChild(readParagraph)
-            bookCard.appendChild(checkboxBox)
-            checkboxBox.appendChild(checkbox)
-            checkboxBox.appendChild(label)
+            bookCard.appendChild(markAsReadButton)
             bookCard.appendChild(removeButton)
-        
+       
         } else if (book.read === "Yes"){
             const bookCard = document.createElement("div")
             bookCard.classList.add("bookcard")
+            bookCard.classList.add("readbook")
             const titleParagraph = document.createElement("p")
             titleParagraph.classList.add("title")
             titleParagraph.textContent = "Title: "+book.title
@@ -104,6 +125,15 @@ function displayBooks(){
             const readParagraph = document.createElement("p")
             readParagraph.classList.add("read")
             readParagraph.textContent = "Read?: "+book.read
+            let markAsUnreadButton = document.createElement('input')
+            markAsUnreadButton.type = "button"
+            markAsUnreadButton.name = "markasunreadbutton"
+            markAsUnreadButton.value = "Mark as Unread?"
+            markAsUnreadButton.classList.add("markasunreadbutton")
+            markAsUnreadButton.addEventListener("click",function(){
+                book.markAsUnread()
+                console.log(libraryOfBooks)
+            })
             let removeButton = document.createElement('input')
             removeButton.type = "button"
             removeButton.name = "removebutton"
@@ -111,12 +141,15 @@ function displayBooks(){
             removeButton.classList.add("removebutton")
             removeButton.addEventListener("click",function(){
                 bookCard.remove()
+                book.deleteBook()
+                console.log(libraryOfBooks)
             })
             bookContainer.appendChild(bookCard)
             bookCard.appendChild(titleParagraph)
             bookCard.appendChild(authorParagraph)
             bookCard.appendChild(pagesParagraph)
             bookCard.appendChild(readParagraph)
+            bookCard.appendChild(markAsUnreadButton)
             bookCard.appendChild(removeButton)
             }
     }

@@ -6,9 +6,16 @@
     <title>Library</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Your Library</h1>
+    <div class="header-div">
+        <h1>Your Library</h1>
+        <img src="./images/bookstack.png" alt="bookshelf" id="bookshelfimage">
+
+    </div>
     <div class="subheading">Keep track of the books you have read with your personal library.</div>
     <form action="post">
     <div class="form-booktitle">
@@ -26,11 +33,13 @@
     <div class="form-bookread">
         <div class="subheading">Have you read this book?</div>
         <label for="bookread-yes" id="yes-label">Yes</label>
-        <input type="radio" id="radio-yes" name="book-read" required>
+        <input type="radio" id="radio-yes" name="book-read" value="Yes" required>
         <label for="bookread-yes" id="no-label">No</label>
-        <input type="radio" id="radio-no" name="book-read" required>
+        <input type="radio" id="radio-no" name="book-read" value="No" required>
     </div>
-    <button type="submit" id="submit-btn">Add Book</button>
+    <div class="button-div">
+        <button type="button" id="submit-btn">Add Book</button>
+    </div>
 
     </form>
     <div class="container">
