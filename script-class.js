@@ -88,7 +88,7 @@ function displayBooks(){
             markAsReadButton.value = "Mark as Read?"
             markAsReadButton.classList.add("markasreadbutton")
             markAsReadButton.addEventListener("click",function(){
-                book.markAsRead
+                book.markAsRead()
             })
             let removeButton = document.createElement('input')
             removeButton.type = "button"
@@ -97,7 +97,7 @@ function displayBooks(){
             removeButton.classList.add("removebutton")
             removeButton.addEventListener("click",function(){
                 bookCard.remove()
-                book.deleteBook
+                book.deleteBook()
             })
             bookContainer.appendChild(bookCard)
             bookCard.appendChild(titleParagraph)
@@ -129,7 +129,7 @@ function displayBooks(){
             markAsUnreadButton.value = "Mark as Unread?"
             markAsUnreadButton.classList.add("markasunreadbutton")
             markAsUnreadButton.addEventListener("click",function(){
-                book.markAsUnread
+                book.markAsUnread()
             })
             let removeButton = document.createElement('input')
             removeButton.type = "button"
@@ -138,7 +138,7 @@ function displayBooks(){
             removeButton.classList.add("removebutton")
             removeButton.addEventListener("click",function(){
                 bookCard.remove()
-                book.deleteBook
+                book.deleteBook()
             })
             bookContainer.appendChild(bookCard)
             bookCard.appendChild(titleParagraph)
